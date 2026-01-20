@@ -32,7 +32,7 @@
         $age = "22";
         $city = "Dublin";
 
-        echo "My name is $firstName $lastName. Im $age years old. I live in $city";
+        echo "My name is $firstName $lastName. Im $age years old and I live in $city";
         ?>
     </div>
 
@@ -50,6 +50,12 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+        $price = 10;
+        $quantity = 3;
+        $total = $price * $quantity;
+
+        echo "Total: $total";
+
         ?>
     </div>
 
@@ -65,6 +71,11 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+        $isLoggedIn = true;
+        $isAdmin = false;
+
+        echo "logged in: " . ($isLoggedIn ? "yes" : "No") . "<br>";
+        echo "Admin: " . ($isAdmin ? "yes" : "no");
         ?>
     </div>
 
