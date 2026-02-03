@@ -18,7 +18,9 @@
     <h2>Exercise 1: Temperature Converter</h2>
     <p>
         <strong>Task:</strong> 
-        Create a function called celsiusToFahrenheit() that takes a Celsius temperature as a parameter and returns the Fahrenheit equivalent. Formula: F = (C × 9/5) + 32. Test it with a few values.
+        Create a function called celsiusToFahrenheit() that takes a Celsius 
+        temperature as a parameter and returns the Fahrenheit equivalent. 
+        Formula: F = (C × 9/5) + 32. Test it with a few values.
     </p>
 
     <p class="output-label">Output:</p>
@@ -41,6 +43,10 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+
+        function calculateRectangleArea($width, $height){
+            
+        }
         ?>
     </div>
 
