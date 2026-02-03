@@ -44,9 +44,21 @@
         <?php
         // TODO: Write your solution here
 
-        function calculateRectangleArea($width, $height){
-            
+        function calculateRectangleArea($width, $height = null){
+            if ($height === null) {
+                $area = $width * $width;
+            }
+            else {
+                $area = $width * $height;
+            }
+            return $area;
         }
+
+        $area = calculateRectangleArea(12, 6);
+        echo "<p>Area of rectangle with width 12 and height 6 is $area</p>";
+
+        $area = calculateRectangleArea(10);
+        echo "<p>Area of square with sides 10 is $area</p>";
         ?>
     </div>
 
@@ -63,6 +75,11 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+        // function checkEvenOdd($number)
+        // if ($number % 2 === 0) {
+        //     $result = "Even";
+        // }
+        // else ($number %)
         ?>
     </div>
 
