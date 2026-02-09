@@ -31,12 +31,17 @@ try {
     // =========================================================================
     // TODO: First, just dump the posted data to see what's submitted
 
+    dd($_POST);
 
     // =========================================================================
     // STEP 2: Check Request Method
     // See: /examples/04-php-forms/step-02-request-method/
     // =========================================================================
     // TODO: Check that the request method is POST
+
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        throw new Exception('Invalid request method.');
+    }
 
 
     // =========================================================================
@@ -51,6 +56,17 @@ try {
     // extraction:
     // 'format_ids' => $_POST['format_ids'] ?? []
 
+     $data = [
+        'title' => $_POST['title'] ?? null,
+        'author' => $_POST['author'] ?? null,
+        'publisher_id' => $_POST['publisher_id'] ?? null,
+        'year' => $_POST['year'] ?? null,
+        'isbn' => $_POST['isbn'] ?? null,
+        'format_ids' => $_POST['format_ids'] ?? [],
+        'description' => $_POST['description'] ?? null
+    ];
+
+    //dd($data);
 
     // =========================================================================
     // STEP 4: Validate Data
@@ -61,6 +77,28 @@ try {
     // Create validator and check if validation fails; if so, store the first 
     // error for each field in the $errors array and throw an exception
 
+    $year=date("Y");
+    $rules = [
+        'title' => 'required|notempty|min:5|max:255',
+        'author' => 'required|notempty|min:5|max:255',
+        'publisher_id' => 'required|notempty|integer',
+        'year' => 'required|notempty|integer|minvalue:1900|maxvalue:'. $year,
+        'isbn' => 'required|notempty|min:13|max:13',
+        'format_ids' => 'required|notempty|array|min:1|max:4',
+        'description' => 'required|notempty|min:10'
+    ];
+
+    $validator = new Validator($data, $rules);
+
+    if ($validator->fails()) {
+        foreach ($validator->errors() as $field => $fieldErrors) {
+            $errors[$field] = $fieldErrors[0];
+        }
+        throw new Exception('Validation failed.');
+    }
+
+
+    echo "Validation passed!";
 
     // =========================================================================
     // STEP 9: File Uploads
@@ -102,13 +140,16 @@ catch (Exception $e) {
     // TODO: In the catch block, store validation errors in the session
     // TODO: Redirect back to the form
 
-
+    setFormErrors($errors);
+    
+    
     // =========================================================================
     // STEP 6: Store Form Data for Repopulation
     // See: /examples/04-php-forms/step-06-repopulate-fields/
     // =========================================================================
     // TODO: Before redirecting on error, also store the form data
 
+    setFormData($data);
 
     // =========================================================================
     // STEP 8: Flash Messages
@@ -116,5 +157,6 @@ catch (Exception $e) {
     // =========================================================================
     // TODO: On validation error, you set an error flash message
 
-    
+    redirect('book_create.php');
+
 }
