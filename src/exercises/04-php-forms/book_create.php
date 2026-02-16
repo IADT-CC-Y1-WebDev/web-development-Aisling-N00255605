@@ -121,7 +121,7 @@ $formats = [
         </div>
 
         <!-- =============================================================== -->
-        <!-- Publisher Select Field                                          -->
+        <!-- Publisher Select Field .                                         -->
         <!-- See: /examples/04-php-forms/step-07-select-checkbox/            -->
         <!-- =============================================================== -->
         <div class="form-group">

@@ -40,6 +40,16 @@ require_once __DIR__ . '/lib/config.php';
             // 1. Create a PDO connection
             // 2. Display success message
             // 3. Handle errors with try/catch
+
+            try {
+                $db = new PDO(DB_DSN, DB_USER, DB_PASS, DB_OPTIONS);
+                echo "Connected using config constants!";
+            } catch (PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
+            }
+
+
+            
             ?>
         </div>
     </div>

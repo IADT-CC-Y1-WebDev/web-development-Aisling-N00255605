@@ -56,6 +56,23 @@ catch (PDOException $e) {
             // 3. Check rowCount() === 1
             // 4. Get lastInsertId()
             // 5. Display success message with the new ID
+
+            $stmt = $db -> prepare("
+                INSERT INTO books (title, author, publisher_id, year, description) 
+                VALUES (:title, :author, :publisher_id, :year, :description)
+            ");
+
+            $stmt-> execute([
+                'title' => 'The Hunger Games',
+                'author' => 'Suzanne Collins',
+                'publisher_id' => 1,
+                'year' => '2012',
+                'description' => 'A series of young adult dystopian novels written by American author Suzanne Collins.'
+            ]);
+
+            $newId = $db->lastInsertId();
+            echo "Inserted book with ID: $newId";
+            
             ?>
         </div>
     </div>
