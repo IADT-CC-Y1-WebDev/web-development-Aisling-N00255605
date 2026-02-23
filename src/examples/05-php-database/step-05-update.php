@@ -24,7 +24,7 @@ $db = new PDO(DB_DSN, DB_USER, DB_PASS, DB_OPTIONS);
             is critical - without it, you'll update every row in the table!
         </p>
 
-        <!-- Show current state -->
+        <!-- Show current state. -->
         <h2>Current Games (Before Updates)</h2>
         <div class="output">
             <?php

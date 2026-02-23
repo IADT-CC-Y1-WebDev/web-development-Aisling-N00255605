@@ -47,7 +47,32 @@ catch (PDOException $e) {
             // 3. Execute with new description + timestamp
             // 4. Check rowCount()
             // 5. Fetch and display updated book
+
+            $stmt = $db->query("SELECT id, title, year, description FROM books ORDER BY id LIMIT 5");
+            $games = $stmt->fetchAll();
             ?>
+
+<table class="data-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Year</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+    <tbody>
+         <?php foreach ($books as $book): ?>
+            <tr>
+                <td><?= $book['id'] ?></td>
+                <td><?= htmlspecialchars($book['title']) ?></td>
+                <td><?= $book['year'] ?></td>
+                <td><?= htmlspecialchars(substr($book['description'], 0, 50)) ?>...</td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+            
         </div>
     </div>
 </body>
