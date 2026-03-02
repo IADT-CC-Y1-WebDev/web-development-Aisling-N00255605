@@ -48,30 +48,37 @@ catch (PDOException $e) {
             // 4. Check rowCount()
             // 5. Fetch and display updated book
 
-            $stmt = $db->query("SELECT id, title, year, description FROM books ORDER BY id LIMIT 5");
-            $games = $stmt->fetchAll();
+            $stmt = $db->query("SELECT id, title, year, description FROM books WHERE id = 1");
+            $book = $stmt->fetch();
             ?>
-
-<table class="data-table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Title</th>
-                <th>Year</th>
-                <th>Description</th>
-            </tr>
-        </thead>
+            <table class="data-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>year</th>
+            <th>Description</th>
+        </tr>
+    </thead>
     <tbody>
-         <?php foreach ($books as $book): ?>
-            <tr>
-                <td><?= $book['id'] ?></td>
-                <td><?= htmlspecialchars($book['title']) ?></td>
-                <td><?= $book['year'] ?></td>
-                <td><?= htmlspecialchars(substr($book['description'], 0, 50)) ?>...</td>
-            </tr>
-        <?php endforeach; ?>
+        <tr>
+            <td><?= $book['id'] ?></td>
+            <td><?= htmlspecialchars($book['title']) ?></td>
+            <td><?= $book['year'] ?></td>
+            <td><?= htmlspecialchars(substr($book['description'], 0, 50)) ?>...</td>
+        </tr>
     </tbody>
 </table>
+
+    <?php 
+        $stmt = $db->prepare("UPDATE books SET description = :description WHERE id = :id");
+        $stmt->execute([
+        'description' => 'Updated description.',
+        'id' => 1
+]);
+
+        echo "Updated " . $stmt->rowCount() . " row(s)";
+    ?>
             
         </div>
     </div>
