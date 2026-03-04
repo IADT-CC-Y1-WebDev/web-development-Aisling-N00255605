@@ -177,7 +177,7 @@ class Book
 
         // Ensure one row affected
         if ($stmt->rowCount() !== 1) {
-            throw new Exception("Failed to save game.");
+            throw new Exception("Failed to save book.");
         }
 
         // Set ID for new records
