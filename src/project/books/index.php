@@ -3,16 +3,20 @@ require_once 'php/lib/config.php';
 
 try {
     $books = Book::findAll();
-    // $genres = Genre::findAll();
-    // $platforms = Platform::findAll();
+
 } 
 catch (PDOException $e) {
     die("<p>PDO Exception: " . $e->getMessage() . "</p>");
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <link rel="stylesheet" href="/project/books/css/all.min.css">
+        <link rel="stylesheet" href="/project/books/css/grid.css">
+        <link rel="stylesheet" href="/project/books/css/reset.css">
+        <link rel="stylesheet" href="/project/books/css/style.css">
         <title>Books</title>
     </head>
     <body>
@@ -54,7 +58,9 @@ catch (PDOException $e) {
                     <?php foreach ($books as $book) { ?>
                         <div class="card">
                             <div class="top-content">
+                                <img src="images/<?= ($book->cover_filename) ?>" />
                                 <h2>Title: <?= ($book->title) ?></h2>
+                                <p>Author: <?= ($book->author) ?></p>
                                 <p>Year: <?= ($book->year) ?></p>
                             </div>
                             <div class="bottom-content">

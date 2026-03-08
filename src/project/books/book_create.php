@@ -1,172 +1,91 @@
 <?php
+require_once 'php/lib/config.php';
+require_once 'php/lib/session.php';
+require_once 'php/lib/forms.php';
+require_once 'php/lib/utils.php';
 
-class books {
-    public $id;
-    public $title;
-    public $year;
-    public $genre_id;
-    public $description;
-    public $image_filename;
+startSession();
 
-    private $db;
+?>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="/project/books/css/all.min.css">
+        <link rel="stylesheet" href="/project/books/css/grid.css">
+        <link rel="stylesheet" href="/project/books/css/reset.css">
+        <link rel="stylesheet" href="/project/books/css/style.css">
+        <!-- <?php include 'php/inc/head_content.php'; ?> -->
+        <title>Create Book</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="width-12">
+                <!-- <?php require 'php/inc/flash_message.php'; ?> -->
+            </div>
+            <div class="width-12">
+                <h1>Create Book</h1>
+            </div>
+            <div class="width-12">
+                <form action="book_store.php" method="POST">
+                    <div class="input">
+                        <label class="special" for="title">Title:</label>
+                        <div>
+                            <input type="text" id="title" name="title" value="<?= old('title') ?>" required>
+                            <p><?= error('title') ?></p>
+                        </div>
+                    </div>
 
-    public function __construct($data = []) {
-        $this->db = DB::getInstance()->getConnection();
+                    <div class="input">
+                        <label class="special" for="author">Author:</label>
+                        <div>
+                            <input type="text" id="author" name="author" value="<?= old('author') ?>" required>
+                            <p><?= error('author') ?></p>
+                        </div>
+                    </div>
 
-        if (!empty($data)) {
-            $this->id = $data['id'] ?? null;
-            $this->title = $data['title'] ?? null;
-            $this->release_date = $data['release_date'] ?? null;
-            $this->genre_id = $data['genre_id'] ?? null;
-            $this->description = $data['description'] ?? null;
-            $this->image_filename = $data['image_filename'] ?? null;
-        }
-    }
+                    <div class="input">
+                        <label class="special" for="year">Year:</label>
+                        <div>
+                            <input type="number" id="year" name="year" value="<?= old('year') ?>" required>
+                            <p><?= error('year') ?></p>
+                        </div>
+                    </div>
 
-    // Find all games
-    public static function findAll() {
-        $db = DB::getInstance()->getConnection();
-        $stmt = $db->prepare("SELECT * FROM games ORDER BY title");
-        $stmt->execute();
+                    <div class="input">
+                        <label class="special" for="isbn">ISBN:</label>
+                        <div>
+                            <input type="text" id="isbn" name="isbn" value="<?= old('isbn') ?>" required>
+                            <p><?= error('isbn') ?></p>
+                        </div>
+                    </div>
 
-        $games = [];
-        while ($row = $stmt->fetch()) {
-            $games[] = new Game($row);
-        }
+                    <div class="input">
+                        <label class="special" for="description">Description:</label>
+                        <div>
+                            <textarea id="description" name="description" required><?= old('description') ?></textarea>
+                            <p><?= error('description') ?></p>
+                        </div>
+                    </div>
 
-        return $games;
-    }
-
-    // Find game by ID
-    public static function findById($id) {
-        $db = DB::getInstance()->getConnection();
-        $stmt = $db->prepare("SELECT * FROM games WHERE id = :id");
-        $stmt->execute(['id' => $id]);
-
-        $row = $stmt->fetch();
-        if ($row) {
-            return new Game($row);
-        }
-
-        return null;
-    }
-
-    // Find games by genre
-    public static function findByGenre($genreId) {
-        $db = DB::getInstance()->getConnection();
-        $stmt = $db->prepare("SELECT * FROM games WHERE genre_id = :genre_id ORDER BY title");
-        $stmt->execute(['genre_id' => $genreId]);
-
-        $games = [];
-        while ($row = $stmt->fetch()) {
-            $games[] = new Game($row);
-        }
-
-        return $games;
-    }
-
-    // Find games by platform (requires JOIN with GamePlatforms table)
-    public static function findByPlatform($platformId) {
-        $db = DB::getInstance()->getConnection();
-        $stmt = $db->prepare("
-            SELECT g.*
-            FROM games g
-            INNER JOIN game_platform gp ON g.id = gp.game_id
-            WHERE gp.platform_id = :platform_id
-            ORDER BY g.title
-        ");
-        $stmt->execute(['platform_id' => $platformId]);
-
-        $games = [];
-        while ($row = $stmt->fetch()) {
-            $games[] = new Game($row);
-        }
-
-        return $games;
-    }
-
-    // Save (insert or update)
-    public function save() {
-        if ($this->id) {
-            // Update existing record
-            $stmt = $this->db->prepare("
-                UPDATE games
-                SET title = :title,
-                    release_date = :release_date,
-                    genre_id = :genre_id,
-                    description = :description,
-                    image_filename = :image_filename
-                WHERE id = :id
-            ");
-
-            $params = [
-                'title' => $this->title,
-                'release_date' => $this->release_date,
-                'genre_id' => $this->genre_id,
-                'description' => $this->description,
-                'image_filename' => $this->image_filename,
-                'id' => $this->id
-            ];
-        } 
-        else {
-            // Insert new record
-            $stmt = $this->db->prepare("
-                INSERT INTO games (title, release_date, genre_id, description, image_filename)
-                VALUES (:title, :release_date, :genre_id, :description, :image_filename)
-            ");
-
-            $params = [
-                'title' => $this->title,
-                'release_date' => $this->release_date,
-                'genre_id' => $this->genre_id,
-                'description' => $this->description,
-                'image_filename' => $this->image_filename
-            ];
-        }
-        // Execute statement
-        $status = $stmt->execute($params);
-
-        // Check for errors
-        if (!$status) {
-            $error_info = $stmt->errorInfo();
-            $message = sprintf(
-                "SQLSTATE error code: %d; error message: %s",
-                $error_info[0],
-                $error_info[2]
-            );
-            throw new Exception($message);  
-        }
-
-        // Ensure one row affected
-        if ($stmt->rowCount() !== 1) {
-            throw new Exception("Failed to save game.");
-        }
-
-        // Set ID for new records
-        if ($this->id === null) {
-            $this->id = $this->db->lastInsertId();
-        }
-    }
-
-    // Delete
-    public function delete() {
-        if (!$this->id) {
-            return false;
-        }
-
-        $stmt = $this->db->prepare("DELETE FROM games WHERE id = :id");
-        return $stmt->execute(['id' => $this->id]);
-    }
-
-    // Convert to array for JSON output
-    public function toArray() {
-        return [
-            'id' => $this->id,
-            'title' => $this->title,
-            'release_date' => $this->release_date,
-            'genre_id' => $this->genre_id,
-            'description' => $this->description,
-            'image_filename' => $this->image_filename
-        ];
-    }
-}
+                    <div class="input">
+                        <label class="special" for="image">Image (required):</label>
+                        <div>
+                            <input type="file" id="image" name="image" accept="image/*" required>
+                            <p><?= error('image') ?></p>
+                        </div>
+                    </div>
+                    <div class="input">
+                        <button class="button" type="submit">Store Book</button>
+                        <div class="button"><a href="book_list.php">Cancel</a></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
+<?php
+// Clear form data after displaying
+clearFormData();
+// Clear errors after displaying
+clearFormErrors();
+?>
