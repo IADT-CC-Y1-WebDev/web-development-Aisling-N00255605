@@ -65,7 +65,6 @@ class Book
     public static function findAll()
     {
         // TODO: Implement this method
-        public static function findAll() {
         $db = DB::getInstance()->getConnection();
         $stmt = $db->prepare("SELECT * FROM books ORDER BY title");
         $stmt->execute();
@@ -162,7 +161,7 @@ class Book
                 'description' => $this->description,
                 'cover_filename' => $this->cover_filename
             ];
-    }
+        }
 
         $status = $stmt->execute($params);
 

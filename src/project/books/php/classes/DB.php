@@ -1,9 +1,25 @@
 <?php
+/**
+ * Database Singleton Class
+ *
+ * This class implements the Singleton pattern to ensure only one
+ * database connection is created throughout the application.
+ *
+ * Usage:
+ *   $db = DB::getInstance()->getConnection();
+ *   $stmt = $db->prepare("SELECT * FROM books");
+ */
 class DB
 {
+    /** @var DB|null The single instance of this class */
     private static $instance = null;
 
+    /** @var PDO The PDO database connection */
     private $connection;
+
+    /**
+     * Private constructor - prevents direct instantiation
+     */
     private function __construct()
     {
         try {
@@ -13,6 +29,11 @@ class DB
         }
     }
 
+    /**
+     * Get the singleton instance
+     *
+     * @return DB The singleton instance
+     */
     public static function getInstance()
     {
         if (self::$instance === null) {
@@ -21,16 +42,26 @@ class DB
         return self::$instance;
     }
 
+    /**
+     * Get the PDO connection
+     *
+     * @return PDO The database connection
+     */
     public function getConnection()
     {
         return $this->connection;
     }
 
+    /**
+     * Prevent cloning of the instance
+     */
     private function __clone() {}
 
+    /**
+     * Prevent unserialization of the instance
+     */
     public function __wakeup()
     {
         throw new Exception("Cannot unserialize a singleton.");
     }
 }
-?>

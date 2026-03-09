@@ -23,6 +23,12 @@ try {
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+        <link rel="stylesheet" href="/project/books/css/all.min.css">
+        <link rel="stylesheet" href="/project/books/css/grid.css">
+        <link rel="stylesheet" href="/project/books/css/reset.css">
+        <link rel="stylesheet" href="/project/books/css/style.css">
+
     <?php include 'php/inc/head_content.php'; ?>
     <title>View Book</title>
 </head>

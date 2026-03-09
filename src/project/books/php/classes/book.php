@@ -76,6 +76,7 @@ class Book
 
         return $books;
     }
+
     // =========================================================================
     // Exercise 9: Finder Methods
     // =========================================================================
@@ -160,7 +161,7 @@ class Book
                 'description' => $this->description,
                 'cover_filename' => $this->cover_filename
             ];
-    }
+        }
 
         $status = $stmt->execute($params);
 
@@ -177,7 +178,7 @@ class Book
 
         // Ensure one row affected
         if ($stmt->rowCount() !== 1) {
-            throw new Exception("Failed to save book.");
+            throw new Exception("Failed to save game.");
         }
 
         // Set ID for new records

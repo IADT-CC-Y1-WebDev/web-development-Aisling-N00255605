@@ -1,22 +1,8 @@
 <?php
-/**
- * User Registration Handler - Exercise
- *
- * Follow the steps below to progressively implement form handling.
- * Each step corresponds to an example in /examples/04-php-forms/
- *
- * This file processes the form submission from book_create.php
- */
-
-
-// =============================================================================
-// Write your code here
-// =============================================================================
-// Include the required library files
-require_once './lib/config.php';
-require_once './lib/session.php';
-require_once './lib/forms.php';
-require_once './lib/utils.php';
+require_once 'php/lib/config.php';
+require_once 'php/lib/session.php';
+require_once 'php/lib/forms.php';
+require_once 'php/lib/utils.php';
 
 $data = [];
 $errors = [];
