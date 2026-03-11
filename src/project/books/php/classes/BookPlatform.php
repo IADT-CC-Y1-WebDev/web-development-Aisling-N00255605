@@ -1,63 +1,62 @@
 <?php
 
-class BookPlatform {
+class BookFormat {
     // Check if a relationship exists
-    public static function exists($bookId, $platformId) {
+    public static function exists($bookId, $formatId) {
         $db = DB::getInstance()->getConnection();
         $stmt = $db->prepare("
-            SELECT COUNT(*) as count
-            FROM game_platform
-            WHERE game_id = :game_id AND platform_id = :platform_id
+            SELECT COUNT(*) AS count
+            FROM book_format
+            WHERE book_id = :book_id AND format_id = :format_id
         ");
         $stmt->execute([
-            'game_id' => $gameId,
-            'platform_id' => $platformId
+            'book_id' => $bookId,
+            'format_id' => $formatId
         ]);
 
         $row = $stmt->fetch();
         return $row['count'] > 0;
     }
 
-    // Create a new game-platform relationship
-    public static function create($gameId, $platformId) {
-        // Check if relationship already exists
-        if (self::exists($gameId, $platformId)) {
-            return false;
+    // Create a new book-format relationship
+    public static function create($bookId, $formatId) {
+        if (self::exists($bookId, $formatId)) {
+            return false; // Already exists
         }
 
         $db = DB::getInstance()->getConnection();
         $stmt = $db->prepare("
-            INSERT INTO game_platform (game_id, platform_id)
-            VALUES (:game_id, :platform_id)
+            INSERT INTO book_format (book_id, format_id)
+            VALUES (:book_id, :format_id)
         ");
 
         return $stmt->execute([
-            'game_id' => $gameId,
-            'platform_id' => $platformId
+            'book_id' => $bookId,
+            'format_id' => $formatId
         ]);
     }
 
-    // Delete a specific game-platform relationship
-    public static function remove($gameId, $platformId) {
+    // Delete a specific book-format relationship
+    public static function remove($bookId, $formatId) {
         $db = DB::getInstance()->getConnection();
         $stmt = $db->prepare("
-            DELETE FROM game_platform
-            WHERE game_id = :game_id AND platform_id = :platform_id
+            DELETE FROM book_format
+            WHERE book_id = :book_id AND format_id = :format_id
         ");
 
         return $stmt->execute([
-            'game_id' => $gameId,
-            'platform_id' => $platformId
+            'book_id' => $bookId,
+            'format_id' => $formatId
         ]);
     }
 
-    // Delete all platform relationships for a specific game
-    public static function deleteByGame($gameId) {
+    // Delete all format relationships for a specific book
+    public static function deleteByBook($bookId) {
         $db = DB::getInstance()->getConnection();
         $stmt = $db->prepare("
-            DELETE FROM game_platform
-            WHERE game_id = :game_id
+            DELETE FROM book_format
+            WHERE book_id = :book_id
         ");
-        return $stmt->execute(['game_id' => $gameId]);
+        return $stmt->execute(['book_id' => $bookId]);
     }
 }

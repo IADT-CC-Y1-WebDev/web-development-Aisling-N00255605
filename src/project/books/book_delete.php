@@ -32,20 +32,20 @@ try {
         throw new Exception('Validation failed.');
     }
 
-    $game = Book::findById($data['id']);
-    if (!$game) {
+    $book = Book::findById($data['id']);
+    if (!$book) {
         throw new Exception('Book not found.');
     }
 
-    if ($book->image_filename) {
+    if ($book->cover_filename) {
         $uploader = new ImageUpload();
-        $uploader->deleteImage($book->image_filename);
+        $uploader->deleteImage($book->cover_filename);
     }
     // Delete the game
     $book->delete();
     clearFormData();
     clearFormErrors();
-    setFlashMessage('success', 'Game deleted successfully.');
+    setFlashMessage('success', 'Book deleted successfully.');
     redirect('index.php');
 }
 catch (Exception $e) {

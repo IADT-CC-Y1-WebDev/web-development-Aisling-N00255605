@@ -15,6 +15,7 @@ class Format {
         }
     }
 
+    // Get all formats
     public static function findAll() {
         $db = DB::getInstance()->getConnection();
         $stmt = $db->prepare("SELECT * FROM formats ORDER BY name");
@@ -42,27 +43,29 @@ class Format {
         return null;
     }
 
-    // Find platforms by game (requires JOIN with game_platform table)
+    // Find formats assigned to a specific book
     public static function findByBook($book_id) {
         $db = DB::getInstance()->getConnection();
+
         $stmt = $db->prepare("
             SELECT f.*
-            FROM format p
-            INNER JOIN book_format gp ON p.id = gp.platform_id
-            WHERE gp.book_id = :book_id
+            FROM formats f
+            INNER JOIN book_format bf ON f.id = bf.format_id
+            WHERE bf.book_id = :book_id
             ORDER BY f.name
         ");
-        $stmt->execute(['book_id' => $bookId]);
 
-        $platforms = [];
+        $stmt->execute(['book_id' => $book_id]);
+
+        $formats = [];
         while ($row = $stmt->fetch()) {
-            $platforms[] = new Platform($row);
+            $formats[] = new Format($row);
         }
 
-        return $platforms;
+        return $formats;
     }
-   
-    // Convert to array for JSON output
+
+    // Convert to array
     public function toArray() {
         return [
             'id' => $this->id,

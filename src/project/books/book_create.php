@@ -149,7 +149,7 @@ $formats = [
             </div>
 
             <div>
-                <?php if (error('checkbox-label')): ?>
+                <?php if (error('format_ids')): ?>
                     <p class="error"><?= error('checkbox-label') ?></p>
                 <?php endif; ?>
             </div>

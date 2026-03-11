@@ -13,7 +13,6 @@ startSession();
 
 try {
 
-    dd($_POST);
 
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         throw new Exception('Invalid request method.');
@@ -57,7 +56,19 @@ try {
 
     dd($data);
 
-    echo "Validation passed!";
+    $book = new Book();
+
+    $book->title = $data['title'];
+    $book->author = $data['author'];
+    $book->publisher_id = $data['publisher_id'];
+    $book->year = $data['year'];
+    $book->isbn = $data['isbn'];
+    $book->description = $data['description'];
+    $book->cover_filename = $imageFilename;
+
+    $book->save();
+
+    redirect('index.php');
 }
 catch (Exception $e) {
 
