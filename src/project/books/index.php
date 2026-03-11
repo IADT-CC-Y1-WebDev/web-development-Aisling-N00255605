@@ -40,7 +40,6 @@ catch (PDOException $e) {
                 <div class="width-12 cards">
                     <?php foreach ($books as $book) { ?>
                         <div class="card">
-                            <a href="book_view.php">
                             <div class="top-content">
                                 <img src="images/<?= ($book->cover_filename) ?>" />
                                 <h2>Title: <?= ($book->title) ?></h2>
@@ -53,7 +52,7 @@ catch (PDOException $e) {
                                     <a href="book_view.php?id=<?= h($book->id) ?>">View</a>/ 
                                     <a href="book_edit.php?id=<?= h($book->id) ?>">Edit</a>/ 
                                     <a href="book_delete.php?id=<?= h($book->id) ?>">Delete</a>
-                                </div></a>
+                                </div>
                             </div>
                         </div>
                     <?php } ?>
