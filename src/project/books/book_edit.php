@@ -6,6 +6,8 @@ require_once 'php/lib/utils.php';
 
 startSession();
 
+dd($_SESSION);
+
 try {
     if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
         throw new Exception('Invalid request method.');
@@ -23,7 +25,7 @@ try {
     $bookFormats = Format::findByBook($book->id);
     $bookFormatIds = [];
     foreach ($bookFormats as $format) {
-    $bookFormatIds[] = $format->id;
+        $bookFormatIds[] = $format->id;
     }
 
     $publisher = Publisher::findAll();

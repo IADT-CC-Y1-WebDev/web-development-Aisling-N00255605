@@ -74,13 +74,12 @@ try {
     $book->save();
 
 
-    BookFormat::deleteByBook($book->id);
-    // Create new platform associations
-    if (!empty($data['format_ids']) && is_array($data['format_ids'])) {
-        foreach ($data['format_ids'] as $formatids) {
-            BookFormat::create($book->id, $formatids);
-        }
-    }
+    // BookFormat::deleteByBook($book->id);
+    // if (!empty($data['format_ids']) && is_array($data['format_ids'])) {
+    //     foreach ($data['format_ids'] as $formatids) {
+    //         BookFormat::create($book->id, $formatids);
+    //     }
+    // }
 
     // Clear old form data/errors
     clearFormData();
