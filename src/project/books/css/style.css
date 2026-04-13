@@ -62,8 +62,7 @@ body {
 }
 
 .filters {
-	background-color: #f2f2f2;
-	padding: 10px;
+	/* padding: 10px; */
 	display: flex;
 	justify-content: flex-end;
 }
@@ -82,21 +81,21 @@ body {
 .filters form input {
 	font-size: 12px;
 	height: 30px;
-	padding: 5px;
+	/* padding: 5px; */
 }
 
 .filters form select {
 	font-size: 12px;
 	height: 30px;
-	padding: 5px;
+	/* padding: 5px; */
 }
 
 .filters form button {
 	font-size: 13px;
-	background-color: #084108;
-	padding: 5px 10px;
+	background-color: #608a99;
+	/* padding: 5px 10px; */
 	color: #ececec;
-	border: 1px solid #4bff3c;
+	border: 1px solid #527683;
 	border-radius: 5px;
 }
 
@@ -104,14 +103,16 @@ body {
 	display: flex;
 	align-items: baseline;
 	justify-content: space-between;
+	background-color: #abc7d1;
+	padding: 15px;
 }
 
 .button {
 	font-size: 13px;
-	background-color: #123991;
+	background-color: #608a99;
 	padding: 5px 10px;
 	color: #ececec;
-	border: 1px solid #4bff3c;
+	border: 1px solid #527683;
 	border-radius: 5px;
 }
 
