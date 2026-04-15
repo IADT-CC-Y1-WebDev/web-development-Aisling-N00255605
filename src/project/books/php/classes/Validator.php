@@ -118,7 +118,9 @@ class Validator {
                 $this->addError($field, "The $field field is required.");
             }
         }
-        else if ($value === null || $value === '' || (is_array($value) && empty($value))) {
+        else if ($value === null || 
+                $value === '' || 
+                (is_array($value) && empty($value))) {
             $this->addError($field, "The $field field is required.");
         }
     }

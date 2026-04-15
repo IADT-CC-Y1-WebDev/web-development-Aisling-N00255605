@@ -17,6 +17,7 @@ catch (PDOException $e) {
 <html lang="en">
     <head>
         <?php include 'php/inc/head_content.php'; ?>
+        <script src="book.js"></script>
         <title>Books</title>
     </head>
     <body>
