@@ -6,7 +6,7 @@ require_once 'php/lib/utils.php';
 
 startSession();
 
-dd($_SESSION);
+// dd($_SESSION);
 
 try {
     if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
@@ -28,13 +28,13 @@ try {
         $bookFormatIds[] = $format->id;
     }
 
-    $publisher = Publisher::findAll();
+    $publishers = Publisher::findAll();
     $formats = Format::findAll();
 
-    } catch (PDOException $e) {
-        setFlashMessage('error', 'Error: ' . $e->getMessage());
-        redirect('index.php');
-    }
+} catch (PDOException $e) {
+    setFlashMessage('error', 'Error: ' . $e->getMessage());
+    redirect('index.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -82,7 +82,7 @@ try {
                         <label class="special" for="publisher_id">Publisher:</label>
                         <div>
                             <select id="publisher_id" name="publisher_id" required>
-                                <?php foreach ($publisher as $pub) { ?>
+                                <?php foreach ($publishers as $pub) { ?>
                                     <option value="<?= h($pub->id) ?>" <?= chosen('publisher_id', $pub->id, $book->publisher_id) ? "selected" : "" ?>>
                                         <?= h($pub->name) ?>
                                     </option>

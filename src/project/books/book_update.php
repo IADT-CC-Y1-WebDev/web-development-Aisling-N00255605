@@ -33,7 +33,8 @@ try {
         'title' => 'required|notempty|min:1|max:255',
         'author' => 'required|notempty|min:1|max:255',
         'year' => 'required|integer|min:0|max:2100',
-        'isbn' => 'required|notempty|min:5|max:20',
+        'isbn' => 'required|notempty|min:13|max:13',
+        'format_ids' => 'required|notempty|array|min:1|max:4',
         'description' => 'required|notempty|min:10|max:5000',
         'image' => 'file|image|mimes:jpg,jpeg,png|max_file_size:5242880'
     ];
@@ -74,12 +75,12 @@ try {
     $book->save();
 
 
-    // BookFormat::deleteByBook($book->id);
-    // if (!empty($data['format_ids']) && is_array($data['format_ids'])) {
-    //     foreach ($data['format_ids'] as $formatids) {
-    //         BookFormat::create($book->id, $formatids);
-    //     }
-    // }
+    BookFormat::deleteByBook($book->id);
+    if (!empty($data['format_ids']) && is_array($data['format_ids'])) {
+        foreach ($data['format_ids'] as $formatids) {
+            BookFormat::create($book->id, $formatids);
+        }
+    }
 
     // Clear old form data/errors
     clearFormData();

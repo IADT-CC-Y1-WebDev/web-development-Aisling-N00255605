@@ -61,13 +61,17 @@ body {
 	height: 340px;
 }
 
+.card.hidden {
+	display: none;
+}
+
 .filters {
 	/* padding: 10px; */
 	display: flex;
 	justify-content: flex-end;
 }
 
-.filters form {
+form.filters  {
 	display: flex;
 	gap: 15px;
 	align-items: center;

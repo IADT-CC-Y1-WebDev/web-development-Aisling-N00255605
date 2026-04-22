@@ -1,10 +1,10 @@
 let applyBtn = document.getElementById('apply_filters');
 let clearBtn = document.getElementById('clear_filters');
 
-let cardsContainer = document.querySelector('.cards');
+let cardsContainer = document.querySelector(".cards");
 let cards = document.querySelectorAll('.card');
 
-let form = document.querySelector('.filters form');
+let form = document.getElementById("filters");
 
 applyBtn.addEventListener('click', (event) => {
     event.preventDefault();
@@ -28,7 +28,7 @@ function applyFilters() {
 function cardMatches(card, filters) {
     let title = card.dataset.title;
     let publisher = card.dataset.publisher;
-    let format = card.dataset.format;
+    let formats = card.dataset.formats;
 
     let matchTitle =
         filters.title === "" || title.includes(filters.title);
@@ -37,7 +37,7 @@ function cardMatches(card, filters) {
         filters.publisher === "" || publisher === filters.publisher;
 
     let matchFormat =
-        filters.format === "" || format.includes(filters.format);
+        filters.format === "" || formats.includes(filters.format);
 
     return matchTitle && matchPublisher && matchFormat;
 }

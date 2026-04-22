@@ -1,38 +1,87 @@
-let applyBtn = document.getElementById("apply_filters");
-let clearBtn = document.getElementById("clear_filters");
+let applyBtn = document.getElementById('apply_filters');
+let clearBtn = document.getElementById('clear_filters');
 
-let cards = document.getElementById("filters");
+let      = document.getElementById("game_cards");
+let cards = document.querySelectorAll('.card');
+
+let form = document.getElementById("filters");
 
 applyBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    applyFilters();
+});
+
+clearBtn.addEventListener('click', (event) => {
     event.preventDefault();
     clearFilters();
 });
 
-
-clearBtn.addEventListener('click', (event) => {});
-
-function applyFilters(){
-    let filters = getFilter();
-    let matches = [];
-    for ( let i - 0; i != cards.length; i++)
+function applyFilters() {
+    // console.log("Applying filters");
+    let filters = getFilters();
+    // let matches = [];
+    for (let i = 0; i != cards.length; i++) {
+        let card = cards[i];
+        let match = cardMatches(card, filters);
+        card.classList.toggle('hidden', !match);
+    }
+    let cardsArray = Array.from(cards);
+    const sorted = sortCards(cardsArray, filters.sortBy);
+    sorted.forEach(card => {
+        cardsContainer.appendChild(card);
+    });
 }
 
-function getFilters(){
-    const titleE1 = form.elements['title_filter'];
-    const genreE1 = form.elements['genre_filter'];
-    const platformE1 = form.elements['platform_filter'];
-    const sortE1 = form.elements['sort_filter'];
+function sortCards(cards, sortBy) {
+    const list = cards.slice();
+    
+    list.sort((a, b) => {
+        let titleA = a.dataset.title.toLowerCase();
+        let titleB = b.dataset.title.toLowerCase();
+        let yearA = Number(a.dataset.year);
+        let yearB = Number(b.dataset.year);
 
-    let titlFilter = (titleE1.value || ' ').trim().toLowerCase();
-    let genreFilter = genreE1.value || '';
-    let platformFilter = platformE1.value || '';
-    let sortFilter = sortE1.value || 'title_asc';
+        if (sortBy === "year_desc") return yearB - yearA;
+        if (sortBy === "year_asc") return yearA - yearB;
+
+        return titleA.localeCompare(titleB);
+    });
+
+    return list;
 }
 
-return
-    "titleFilter" : titleFilter;
+function cardMatches(crd, fltrs) {
+    // console.log(crd.dataset.title, fltrs.titleFilter);
+    let title = crd.dataset.title.toLowerCase();
+    let genre = crd.dataset.genre;
+    let platform = crd.dataset.platform;
 
+    let matchTitle    = fltrs.titleFilter    === "" || title.includes(fltrs.titleFilter);
+    let matchGenre    = fltrs.genreFilter    === "" || genre === fltrs.genreFilter;
+    let matchPlatform = fltrs.platformFilter === "" || platform.includes(fltrs.platformFilter);
 
-function clearFilters(){
-    console.log("clearing filters")
+    return matchTitle && matchGenre && matchPlatform;
+}
+
+function getFilters() {
+    const titleEl = form.elements['title_filter'];
+    const genreEl = form.elements['genre_filter'];
+    const platformEl = form.elements['platform_filter'];
+    const sortEl = form.elements['sort_by'];
+
+    let titleFilter = (titleEl.value || '').trim().toLowerCase();
+    let genreFilter = genreEl.value || '';
+    let platformFilter = platformEl.value || '';
+    let sortBy = sortEl.value || 'title_asc';
+
+    return {
+        "titleFilter" : titleFilter,
+        "genreFilter" : genreFilter,
+        "platformFilter" : platformFilter,
+        "sortBy" : sortBy
+    };
+}
+
+function clearFilters() {
+    console.log("Clearing filters");
 }
