@@ -96,6 +96,6 @@ catch (PDOException $e) {
             <?php } ?>
         </div>
 
-
+<script src="filters.js"></script>
     </body>
 </html>
