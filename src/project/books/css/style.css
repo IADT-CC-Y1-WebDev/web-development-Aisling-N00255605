@@ -1,197 +1,302 @@
-body {
-	font-family: "IBM Plex Sans";
-	font-size: 16px;
-	font-weight: 400;
-	line-height: 1.5em;
-	background-color: #fff;
+    body {
+	background-color: #353B44; 
+    font-family: "IBM Plex Sans";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5em;
+    background-color: #F4F8F6;
 }
 
 .cards {
-	display: flex;
-	gap: 40px 20px;
-	flex-wrap: wrap;
+    display: flex;
+    gap: 40px 20px;
+    flex-wrap: wrap;
 }
 
 .card {
-	background-color: #f4f4f4;
-	padding: 16px;
-	border-radius: 7px;
-	border: 1px solid #bcbcbc;
-	width: 285px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+    background-color: #FFFFFF;
+    padding: 16px;
+    border-radius: 7px;
+    border: 1px solid #bcbcbc;
+    width: 285px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .card h2 {
-	font-size: 28px;
-	line-height: 32px;
-	font-family: "IBM Plex Serif";
-	margin-bottom: 12px;
-	font-weight: 300;
-	color: #016040;
+    font-size: 28px;
+    line-height: 32px;
+    font-family: "IBM Plex Serif";
+    margin-bottom: 12px;
+    font-weight: 300;
+    color: #016040;
 }
 
 .card p {
-	margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 .card .actions {
-	display: flex;
-	gap: 8px;
-	justify-content: flex-end;
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
 }
 
 .card .actions a {
-	font-weight: 600;
-	color: #b0acfa;
-	font-size: 13px;
-	text-transform: uppercase;
+    font-weight: 600;
+    color: #b0acfa;
+    font-size: 13px;
+    text-transform: uppercase;
 }
 
 .card .actions a:hover {
-	color: #2c22df;
+    color: #2c22df;
 }
 
 .card img {
-	width: 100%;
-	margin-bottom: 10px;
-	object-fit: cover;
-	border: 1px solid #7c75f1;
-	height: 340px;
+    width: 100%;
+    margin-bottom: 10px;
+    object-fit: cover;
+    border: 1px solid #A8C3B0;
+    height: 340px;
 }
-
-.card.hidden {
-	display: none;
-}
-
+/* ~~~~~~~~~~~~Fliters Buttons ~~~~~~~~~~~~ */
 .filters {
-	/* padding: 10px; */
-	display: flex;
-	justify-content: flex-end;
+    /* padding: 10px; */
+    display: flex;
+    justify-content: flex-end;
 }
 
-form.filters  {
-	display: flex;
-	gap: 15px;
-	align-items: center;
-	flex-direction: row;
+.filters form {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-direction: row;
 }
 
 .filters form label {
-	font-size: 12px;
+    font-size: 14px;
 }
 
 .filters form input {
-	font-size: 12px;
-	height: 30px;
-	/* padding: 5px; */
+    font-size: 14px;
+    height: 30px;
+    /* padding: 5px; */
 }
 
 .filters form select {
-	font-size: 12px;
-	height: 30px;
-	/* padding: 5px; */
+    font-size: 14px;
+    height: 30px;
+    /* padding: 5px; */
 }
 
-.filters form button {
-	font-size: 13px;
-	background-color: #608a99;
-	/* padding: 5px 10px; */
-	color: #ececec;
-	border: 1px solid #527683;
-	border-radius: 5px;
+/* ~~~~~~~~~~~~Header and Footer~~~~~~~~~~~~ */
+.header_contents {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 25px;
 }
 
 .header {
-	display: flex;
-	align-items: baseline;
-	justify-content: space-between;
-	background-color: #abc7d1;
-	padding: 15px;
+    background-color: #A8C3B0;
+    margin-bottom: 40px;
 }
 
-.button {
-	font-size: 13px;
-	background-color: #608a99;
-	padding: 5px 10px;
-	color: #ececec;
-	border: 1px solid #527683;
-	border-radius: 5px;
+.footer {
+    background-color: #A8C3B0;
 }
 
+.footer_contents {
+    display: flex;
+    align-items: baseline;
+    padding: 25px;
+}
+
+/* ~~~~~~~~~~~~View book~~~~~~~~~~~~ */
 .hCard {
-	background-color: #f4f4f4;
-	padding: 16px;
-	border-radius: 7px;
-	border: 1px solid #bcbcbc;
-	width: 800px;
-	display: flex;
-	gap: 20px;
-	flex-direction: row;
-	justify-content: space-between;
+    background-color: #F4F8F6;
+    padding: 16px;
+    border-radius: 7px;
+    border: 1px solid #bcbcbc;
+    width: 800px;
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .hCard h2 {
-	font-size: 36px;
-	line-height: 45px;
-	font-family: "IBM Plex Serif";
-	margin-bottom: 12px;
-	font-weight: 300;
-	color: #016040;
+    font-size: 36px;
+    line-height: 45px;
+    font-family: "IBM Plex Serif";
+    margin-bottom: 12px;
+    font-weight: 300;
+    color: #016040;
 }
 
 .hCard p {
-	margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 .hCard .actions {
-	display: flex;
-	gap: 8px;
-	justify-content: flex-end;
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
 }
 
 .hCard .actions a {
-	font-weight: 600;
-	color: #b0acfa;
-	font-size: 13px;
-	text-transform: uppercase;
+    font-weight: 600;
+    color: #b0acfa;
+    font-size: 13px;
+    text-transform: uppercase;
 }
 
 .hCard .actions a:hover {
-	color: #2c22df;
+    color: #2c22df;
 }
 
 .hCard img {
-	width: 340px;
-	margin-bottom: 10px;
-	object-fit: cover;
-	border: 1px solid #7c75f1;
-	height: 340px;
+    /* width: 340px; */
+    margin-bottom: 10px;
+    object-fit: cover;
+    border: 1px solid #7c75f1;
+    /* height: 340px; */
 }
 
+/* ~~~~~~~~~~~~Other~~~~~~~~~~~~ */
+
 form {
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
-	/* align-items: center; */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* align-items: center; */
 }
 
 .input {
-	display: flex;
-	gap: 20px;
+    display: flex;
+    gap: 20px;
 }
 
 .input p {
-	margin-top: 3px;
-	color: red;
-	font-size: 14px;
+    margin-top: 3px;
+    color: red;
+    font-size: 14px;
 }
 
 .input label.special {
-	width: 108px;
-	display: flex;
-	justify-content: flex-end;
-	color: #252525;
-	font-weight: 900;
+    width: 108px;
+    display: flex;
+    justify-content: flex-end;
+    color: #252525;
+    font-weight: 900;
 }
+
+/* ~~~~~~~~~~~~Dark/ Light Mode~~~~~~~~~~~~ */
+/* ~~~~~~~~~~~~Light Mode~~~~~~~~~~~~ */
+body.light {
+    background-color: #F7F7F5;
+    color: #2B2B2B;
+}
+
+body.light .header {
+    background-color: #FFFFFF;
+}
+
+body.light .footer {
+    background-color: #FFFFFF;
+}
+
+body.light .card {
+    background-color: #FFFFFF;
+    border: 1px solid #A8C3B0;
+}
+
+body.light .card h2 {
+    color: #2B2B2B;
+}
+
+body.light .actions a {
+    color: #2B2B2B;
+}
+
+body.light .actions a:hover {
+    color: #797777;
+}
+
+body.light .card img {
+    border: 1px solid #7c75f1;
+}
+
+body.light .button{
+    background-color: #EFEFEA;
+    color: #2B2B2B;
+    border: 1px solid #A8C3B0;
+}
+
+body.light .button:hover {
+    background-color: #E2E2DD;
+}
+
+body.light .filters form button {
+    background-color: #EFEFEA;
+    color: #2B2B2B;
+    border: 1px solid #E6E6E3;
+}
+
+body.light .filters form button:hover {
+    background-color: #E2E2DD;
+}
+
+/* ~~~~~~~~~~~~Dark Mode~~~~~~~~~~~~ */
+body.dark {
+    background-color: #121417;
+    color: #eaeaea;
+}
+
+body.dark .header {
+    background-color: #1C1F24;
+}
+
+body.dark .footer {
+    background-color: #1C1F24;
+}
+
+body.dark .card {
+    background-color: #1F2329;
+    border: 1px solid #7c75f1;
+}
+
+body.dark .card .actions a:hover {
+    color: #b0aecf;
+}
+
+body.dark .card h2 {
+    color: #ffffff;
+}
+
+body.dark .card img {
+    border: 1px solid #7c75f1;
+}
+
+body.dark .button{
+    background-color: #2A2F36;
+    color: #E6EAF0;
+    border: 1px solid #7c75f1;
+}
+
+body.dark .button:hover {
+
+}
+
+body.dark .filters form button {
+    background-color: #2A2F36;
+    color: #E6EAF0;
+    border: 1px solid #7c75f1;
+}
+
+body.dark .filters form button:hover {
+    background-color: #353B44;
+}
+

@@ -67,26 +67,47 @@
 .button {
     display: inline-block;
     padding: 0.5rem 1rem;
-    background-color: #608a99;
-    color: white;
+    background-color: #BFD8C8;
+    color: #000000;
     border: none;
     border-radius: 4px;
-    font-size: 1rem;
+    font-size: 14px;
+    font-weight: 600;
     cursor: pointer;
     text-decoration: none;
     margin-right: 0.5rem;
 }
 
 .button:hover {
-    background-color: #c9dee6;
+    background-color: #A8C3B0;
+    color: white;
 }
 
 .button.secondary {
-    background-color: #6c757d;
+    background-color: #A8C3B0;
 }
 
 .button.secondary:hover {
-    background-color: #545b62;
+    background-color: #A8C3B0;
+}
+
+.filters form button {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    font-size: 14px;
+    font-weight: 600;
+    background-color: #BFD8C8;
+    color: #000000;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-right: 0.5rem;
+}
+
+.filters form button:hover {
+    background-color: #A8C3B0;
+    color: white;
 }
 
 /* Flash Messages */
@@ -156,3 +177,4 @@
     color: #666;
     font-size: 0.9rem;
 }
+
