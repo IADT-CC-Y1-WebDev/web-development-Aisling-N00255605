@@ -1,13 +1,5 @@
 <?php
-/**
- * Database Singleton Class
- *
- * This class implements the Singleton pattern to ensure only one
- * database connection is created throughout the application.
- *
- * Usage:
- *   $db = DB::getInstance()->getConnection();
- *   $stmt = $db->prepare("SELECT * FROM books");
+
  */
 class DB
 {

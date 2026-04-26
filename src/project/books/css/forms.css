@@ -76,7 +76,6 @@
     cursor: pointer;
     text-decoration: none;
     margin-right: 0.5rem;
-    display: flex;
 }
 
 .button:hover {

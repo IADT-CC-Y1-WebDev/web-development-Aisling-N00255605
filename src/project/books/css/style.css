@@ -245,13 +245,13 @@ body.light .button:hover {
     background-color: #E2E2DD;
 }
 
-body.light .filters form button {
+body.light .filters button {
     background-color: #EFEFEA;
     color: #2B2B2B;
     border: 1px solid #E6E6E3;
 }
 
-body.light .filters form button:hover {
+body.light .filters button:hover {
     background-color: #E2E2DD;
 }
 
@@ -293,16 +293,16 @@ body.dark .button{
 }
 
 body.dark .button:hover {
-
+	background-color: #353B44;
 }
 
-body.dark .filters form button {
+body.dark .filters button {
     background-color: #2A2F36;
     color: #E6EAF0;
     border: 1px solid #7c75f1;
 }
 
-body.dark .filters form button:hover {
+body.dark .filters button:hover {
     background-color: #353B44;
 }
 
