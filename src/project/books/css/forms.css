@@ -76,6 +76,7 @@
     cursor: pointer;
     text-decoration: none;
     margin-right: 0.5rem;
+    display: flex;
 }
 
 .button:hover {
@@ -91,7 +92,7 @@
     background-color: #A8C3B0;
 }
 
-.filters form button {
+.filters button {
     display: inline-block;
     padding: 0.5rem 1rem;
     font-size: 14px;
@@ -105,7 +106,13 @@
     margin-right: 0.5rem;
 }
 
-.filters form button:hover {
+.clearApplyButtons {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.filters button:hover {
     background-color: #A8C3B0;
     color: white;
 }

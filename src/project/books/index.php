@@ -64,32 +64,44 @@ catch (PDOException $e) {
                 </div>
                         
                 <?php if (!empty($books)) { ?>
-                    <div class="width-12 filters">
-                        <form>
+                <div class="width-12">
+                    <form id="filters" class="filters">
+                        <div class="input">
+                            <label class="filter-label" for="title_filter">Title:</label>
                             <div>
-                                <label for="title_filter">Title:</label>
-                                <input type="text" id="title_filter" name="title_filter">
+                                <input type="text" id="title_filter" name="title_filter" placeholder="Part of a title">
                             </div>
+                        </div>
 
+                             <!-- ~~~~~~~~~Publishers Filter~~~~~~~~~ -->
+                        <div class="input">
+                            <label class="filter-label" for="publisher_filter">Publisher:</label>
                             <div>
-                                <label for="publisher_filter">Publisher:</label>
                                 <select id="publisher_filter" name="publisher_filter">
                                     <option value="">All Publisher</option>
-                                    <?php foreach ($publishers as $publisher) { ?>
-                                        <option value="<?= h($publisher->id) ?>"><?= h($publisher->name) ?></option>
-                                    <?php } ?>
+                                    <?php foreach ($publishers as $publisher): ?>
+                                        <option value="<?= htmlspecialchars($publisher->id) ?>">
+                                            <?= htmlspecialchars($publisher->name) ?>
+                                        </option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
+                        </div>
 
+                            <!-- ~~~~~~~~~Format Filter~~~~~~~~~ -->
+                        <div class="input">
+                            <label class="filter-label" for="format_filter">Format:</label>
                             <div>
-                                <label for="format_filter">Format:</label>
                                 <select id="format_filter" name="format_filter">
-                                    <option value="">All Format</option>
-                                    <?php foreach ($formats as $format) { ?>
-                                        <option value="<?= h($format->id) ?>"><?= h($format->name) ?></option>
-                                    <?php } ?>
+                                    <option value="">All Formats</option>
+                                    <?php foreach ($formats as $format): ?>
+                                        <option value="<?= htmlspecialchars($format->id) ?>">
+                                            <?= htmlspecialchars($format->name) ?>
+                                        </option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
+                        </div>
 
                             <div class="clearApplyButtons">
                                 <button type="button" id="apply_filters">Apply Filters</button>
@@ -109,8 +121,21 @@ catch (PDOException $e) {
                 <p>No books found.</p>
             <?php } else { ?>
                 <div class="width-12 cards">
-                    <?php foreach ($books as $book) { ?>
-                        <div class="card">
+                    <?php 
+                    foreach ($books as $book) { 
+                        $bookFormats = Format::findByBook($book->id);
+                        $formatIds = [];
+                        foreach ($bookFormats as $f) {
+                            $formatIds[] = $f->id;
+                        }
+                        $formatIdsStr = implode(' ', $formatIds);
+                    ?>
+                        <div class="card"
+                             data-title="<?= $book->title ?>"
+                             data-publisher="<?= $book->publisher_id ?>"
+                             data-formats="<?= $formatIdsStr ?>"
+                             data-year="<?= $book->year ?>"
+                        >
                             <div class="top-content">
                                 <img src="images/<?= ($book->cover_filename) ?>" />
                                 <h2>Title: <?= ($book->title) ?></h2>
@@ -150,6 +175,6 @@ catch (PDOException $e) {
             </div>
         </div>
     </div>
-        <script src="filters.js"></script>
+        <script src="js/filters.js"></script>
     </body>
 </html>
